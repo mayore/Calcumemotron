@@ -29,6 +29,10 @@
             android:exported="true" >
         </service>
 
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="b49b8a72ab3521cd2fc3c6b0cf5dedccebb63d3d" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
