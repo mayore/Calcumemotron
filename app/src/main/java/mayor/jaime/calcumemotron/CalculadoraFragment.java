@@ -233,32 +233,7 @@ public class CalculadoraFragment extends Fragment {
         return res;
     }
 
-/*
-    public void onCreate(Bundle savedInstances) {
-        super.onCreate(savedInstances);
-        setRetainInstance(false);
-        if(savedInstances == null) {
-            numact = "";
-            numant = "";
-            nummem = "";
-            res = 0.0;
-            calc= false;
-            reset = true;
-            dot = false;
-             op = 0;
-        }
-        else {
-            op = savedInstances.getByte("op");
-            Log.i("oprec",op.toString());
-            numant = savedInstances.getString("numant");
-            numact = savedInstances.getString("numact");
-            calc = savedInstances.getBoolean("calc");
-            reset = savedInstances.getBoolean("reset");
-            res = savedInstances.getDouble("result");
-            dot= savedInstances.getBoolean("dot");
-        }
-    }
-*/
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.calculadora, container, false);
@@ -308,14 +283,6 @@ public class CalculadoraFragment extends Fragment {
 
         return rootView;
     }
-    /*
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if(!(savedInstanceState == null)) {
-            txv.setText(savedInstanceState.getString("txv"));
-        }
-    }*/
 
     @Override
     public void onStart() {
