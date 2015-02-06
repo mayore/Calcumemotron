@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import com.crashlytics.android.Crashlytics;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
@@ -24,14 +25,6 @@ public class LogInActivity extends Activity {
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "n48XGo4znOz47tF2y9sJQF1OU";
     private static final String TWITTER_SECRET = "MoWtV0ex7mjrw5UmWzcBciwMunhHqIKYxdFWLa9cFubrVprBo1";
-    View.OnClickListener lis = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-
-        }
-    };
     //Button blog;
     private TwitterLoginButton loginButton;
 
@@ -39,7 +32,7 @@ public class LogInActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+        Fabric.with(this, new Twitter(authConfig), new Crashlytics());
         setContentView(R.layout.activity_log_in);
         //blog = (Button) findViewById(R.id.buttonlogin);
         //blog.setOnClickListener(lis);
@@ -50,12 +43,16 @@ public class LogInActivity extends Activity {
                 // Do something with result, which provides a TwitterSession for making API calls
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
             public void failure(TwitterException exception) {
                 // Do something on failure
+                Intent intent = new Intent(getApplicationContext(),BadLogin.class);
+                startActivity(intent);
             }
+
         });
     }
 
