@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/llamar"
+        android:icon="@drawable/phone32"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_internet" />
+    <item android:id="@+id/internet"
+        android:icon="@drawable/search32"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_llamar" />
+
+</menu>

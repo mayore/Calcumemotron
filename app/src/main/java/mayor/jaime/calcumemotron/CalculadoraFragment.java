@@ -2,14 +2,21 @@ package mayor.jaime.calcumemotron;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class CalculadoraFragment extends Fragment {
@@ -223,6 +230,7 @@ public class CalculadoraFragment extends Fragment {
 
         }
     };
+    private ActionBarDrawerToggle mDrawerToggle;
 
     Double calcula(Double num1, Double num2, Integer op) {
         Double res = 0.0;
@@ -280,7 +288,7 @@ public class CalculadoraFragment extends Fragment {
         bclean = (Button) rootView.findViewById(R.id.buttonclean);
         bclean.setOnClickListener(lis);
         getActivity().setTitle("Calculadora");
-
+        setHasOptionsMenu(true);
         return rootView;
     }
 
@@ -313,4 +321,37 @@ public class CalculadoraFragment extends Fragment {
         editor.putString("txv",txv.getText().toString());
         editor.apply();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_calc, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.llamar:
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + txv.getText()));
+                startActivity(intent);
+                break;
+            case R.id.internet:
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.es"));
+                startActivity(i);
+                break;
+           /* case R.id.toast:
+                if (!toast) {
+                    activate_toast();
+                }
+                break;
+            case R.id.not:
+                if (toast) {
+                    activate_notif();
+                }
+                break;*/
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
